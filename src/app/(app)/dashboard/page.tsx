@@ -34,6 +34,7 @@ export default function DashboardPage() {
       value: formatCurrency(dashboardStats.revenue),
       icon: IndianRupee,
       delta: '+12.4% this month',
+      href: '/analytics',
       color: 'from-indigo-500 to-violet-600',
     },
     {
@@ -41,6 +42,7 @@ export default function DashboardPage() {
       value: dashboardStats.activeProjects.toString(),
       icon: FolderKanban,
       delta: `${tasks.filter((t) => t.status === 'in-progress').length} in progress`,
+      href: '/projects',
       color: 'from-emerald-500 to-teal-600',
     },
     {
@@ -48,6 +50,7 @@ export default function DashboardPage() {
       value: formatCurrency(dashboardStats.pendingPayments),
       icon: Clock,
       delta: 'Follow up with 2 clients',
+      href: '/clients',
       color: 'from-amber-500 to-orange-600',
     },
     {
@@ -55,6 +58,7 @@ export default function DashboardPage() {
       value: formatCurrency(dashboardStats.pendingApprovals),
       icon: CheckCircle2,
       delta: `${dashboardStats.scopeChanges} scope changes tracked`,
+      href: '/change-requests',
       color: 'from-rose-500 to-pink-600',
     },
   ];
@@ -72,7 +76,8 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {cards.map((c) => (
-          <Card key={c.title}>
+          <Link key={c.title} href={c.href} className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <Card className="h-full transition-colors hover:border-primary/50">
             <CardContent className="p-5">
               <div className="flex items-start justify-between">
                 <div className="space-y-1.5">
@@ -90,7 +95,8 @@ export default function DashboardPage() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+            </Card>
+          </Link>
         ))}
       </div>
 
